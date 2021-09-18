@@ -1,0 +1,46 @@
+create database BDEmpresasEMMP
+use BDEmpresasEMM 
+
+create table Empresas (idEmpresa UNIQUEIDENTIFIER primary key, NombreEmpresa varchar(30) not null, Direccion varchar(40) not null, CodigoPostal int not null, 
+Municipio varchar(40) not null, Estado varchar(40) not null, Pais varchar(40) not null, Sobrenombre varchar(40), FechaCreacion datetime not null, RFC varchar(10), FechaBaja datetime,
+observaciones varchar(50))
+
+drop table Empresas
+create table Departamentos (idDepartamento UNIQUEIDENTIFIER primary key, idEmpresa uniqueidentifier FOREIGN KEY REFERENCES Empresas(idEmpresa), NombreDep varchar(30) not null, TipoArea varchar(30) not null,
+FechaCreacion datetime not null, fechaBaja datetime not null)
+
+
+create table Empleado(idEmpleado uniqueidentifier primary key, idEmpresa uniqueidentifier FOREIGN KEY REFERENCES Empresas(idEmpresa), idDepartamento uniqueidentifier FOREIGN KEY REFERENCES Departamentos(idDepartamento),
+Nombre varchar(40) not null, ApellidoMat varchar(40) not null, ApellidoPat varchar(40) not null, TypeRol int not null, direccion varchar(40) not null, CodigoPostal int not null, Municipio varchar(40) not null, Estado varchar(40) not null, 
+Pais varchar(40) not null, FechaNacimiento datetime not null, Email varchar(40) not null, Sexo varchar(20), Rol varchar(30), Telefono1 int not null, Telefono2 int, FechaAlta datetime not null, FechaBaja datetime)
+
+select * from empresas
+
+ALTER TABLE Empleado drop column fechaBaja 
+
+insert into Empresas(idEmpresa, NombreEmpresa, Direccion, CodigoPostal, Municipio, Estado, Pais, Sobrenombre, FechaCreacion, RFC) values (NEWID(),'Empresa A', 'Calle 1 no 1', 50100, 'Toluca', 'Estado de méxico', 'México', 'A', '01/01/21 23:59:59.999', 'EMA020202')
+
+insert into Empresas(idEmpresa, NombreEmpresa, Direccion, CodigoPostal, Municipio, Estado, Pais, Sobrenombre, FechaCreacion, RFC) values (NEWID(),'Empresa B', 'Calle 2 no 2', 50101, 'Toluca', 'Estado de méxico', 'México', 'A', '01/02/21 23:59:59.999', 'EMA030303E33')
+
+insert into Empresas(idEmpresa, NombreEmpresa, Direccion, CodigoPostal, Municipio, Estado, Pais, Sobrenombre, FechaCreacion, RFC) values (NEWID(),'Empresa c', 'Calle 3 no 3', 50101, 'Toluca', 'Estado de méxico', 'México', 'C', '01/02/21 23:59:59.999', 'EMA040404E44')
+
+
+insert into Departamentos(idDepartamento, idEmpresa, NombreDep,  TipoArea, FechaCreacion) values (NEWID(),'1D426435-4A6B-4A05-931B-53791E1062DD','Contaduria' ,'A', '01/01/21 23:59:59.999')
+insert into Departamentos(idDepartamento, idEmpresa, NombreDep,  TipoArea, FechaCreacion) values (NEWID(),'1D426435-4A6B-4A05-931B-53791E1062DD','Sistemas' ,'B', '01/01/21 23:59:59.999')
+insert into Departamentos(idDepartamento, idEmpresa, NombreDep,  TipoArea, FechaCreacion) values (NEWID(),'1D426435-4A6B-4A05-931B-53791E1062DD','Embarques' ,'C', '01/01/21 23:59:59.999')
+
+
+
+insert into Empleado(idEmpleado, idEmpresa, idDepartamento,Nombre, ApellidoMat, ApellidoPat, TypeRol, direccion, CodigoPostal, Municipio, Estado, 
+Pais, FechaNacimiento, Email, Sexo, Rol, Telefono1, FechaAlta) values 
+(NEWID(), '1D426435-4A6B-4A05-931B-53791E1062DD','4909ACF0-C008-47F1-9E83-95E95460CDA9', 'Dario', 'Cordoba', 'Iberry', 2, 'Calle aa num 03', 50100, 
+'Toluca', 'Estado de méxico','México', '11/02/1992', 'dario@correo.com', 'Masculino', '2', '5224119018', '03/07/21 23:59:59.999')
+
+create procedure DepartamentosDeEmpresa @idemp varchar(40) as
+select idDepartamento, idEmpresa, NombreDep,  TipoArea, FechaCreacion  fechaBaja FROM Departamentos where idEmpresa = '1D426435-4A6B-4A05-931B-53791E1062DD'
+go
+
+ EXEC DepartamentosDeEmpresa @idemp = '1D426435-4A6B-4A05-931B-53791E1062DD'; 
+
+ BACKUP DATABASE BDEmpresasEMM TO DISK = 'C:\BDEmpresasEMM.BAK'
+GO
