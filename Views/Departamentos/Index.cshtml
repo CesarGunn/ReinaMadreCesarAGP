@@ -1,0 +1,68 @@
+﻿@model IEnumerable<GEmpresasEMM.Models.Departamentos>
+
+@{
+    ViewBag.Title = "Lista de departamentos";
+}
+
+<h2>Lista de departamentos</h2>
+
+<p>
+    @Html.ActionLink("Crear nuevo", "Create")
+</p>
+@using (Html.BeginForm())
+{
+    <p>
+        Buscar por empresa por nombre o sobrenombre: @Html.TextBox("SearchString")
+        <input type="submit" value="Buscar" />
+    </p>
+}
+<table class="table">
+    <tr>
+        <th>
+            Seleccionar
+        </th>
+        <th>
+            Nombre departamento
+        </th>
+        <th>
+            Area
+        </th>
+        <th>
+            Fecha de creación
+        </th>
+        <th>
+            Empresa que pertenece
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+<tr>
+    <td>
+        @Html.ActionLink("Seleccionar", "DetallesEmpleadoDep", new { id = item.idDepartamento }) |
+
+    </td>
+    <td>
+
+        @Html.DisplayFor(modelItem => item.NombreDep)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.TipoArea)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.FechaCreacion)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Empresas.NombreEmpresa)
+    </td>
+    <td>
+        @Html.ActionLink("Editar", "Edit", new { id = item.idDepartamento }) |
+        @Html.ActionLink("Detalles", "Details", new { id = item.idDepartamento }) |
+        @Html.ActionLink("Borrar", "Delete", new { id = item.idDepartamento })
+    </td>
+</tr>
+    }
+
+</table>
+

@@ -1,0 +1,65 @@
+﻿@model GEmpresasEMM.Models.Departamentos
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Borrar</h2>
+
+<h3>¿Esta seguro de borrar esto?</h3>
+<div>
+    <h4>Departamentos</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.NombreDep)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NombreDep)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TipoArea)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TipoArea)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FechaCreacion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FechaCreacion)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.fechaBaja)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.fechaBaja)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Empresas.NombreEmpresa)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Empresas.NombreEmpresa)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Borrar" class="btn btn-default" /> |
+            @Html.ActionLink("Volver a la lista", "Index")
+        </div>
+    }
+</div>

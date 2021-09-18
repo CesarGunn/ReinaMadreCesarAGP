@@ -1,0 +1,58 @@
+﻿@model GEmpresasEMM.Models.Departamentos
+
+@{
+    ViewBag.Title = "Detalles de departamento";
+}
+
+<h2>Detalles</h2>
+
+<div>
+    <h4>Departamentos</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            Nombre del departamento
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NombreDep)
+        </dd>
+
+        <dt>
+            Tipo de area
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TipoArea)
+        </dd>
+
+        <dt>
+            Fecha de creación
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FechaCreacion)
+        </dd>
+
+        <dt>
+            Fecha de baja
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.fechaBaja)
+        </dd>
+
+        <dt>
+            Nombre de la empresa
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Empresas.NombreEmpresa)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Editar", "Edit", new { id = Model.idDepartamento }) |
+    @Html.ActionLink("volver a la lista", "Index")
+</p>

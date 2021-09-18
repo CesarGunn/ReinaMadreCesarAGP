@@ -1,0 +1,105 @@
+﻿@model IEnumerable<GEmpresasEMM.Models.Empresas>
+
+@{
+    ViewBag.Title = "Lista empresas";
+}
+
+<h2>Lista de empresas</h2>
+
+<p>
+    @Html.ActionLink("Crear nueva", "Create")
+</p>
+@using (Html.BeginForm())
+{
+    <p>
+        Buscar por empresa por nombre o sobrenombre: @Html.TextBox("SearchString")
+        <input type="submit" value="Buscar" />
+    </p>
+}
+
+<table class="table">
+    <tr>
+        <th>
+            Seleccionar
+        </th>
+        <th>
+            Empresa
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Direccion)
+        </th>
+        <th>
+            Codigo postal
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Municipio)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Estado)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Pais)
+        </th>
+        <th>
+            Apodo
+        </th>
+        <th>
+            Fecha de creación
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.RFC)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.observaciones)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+<tr>
+    <td>
+        @Html.ActionLink("Seleccionar", "DetalleDepartamentosEmp", new { id = item.idEmpresa }) |
+        
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.NombreEmpresa)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Direccion)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.CodigoPostal)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Municipio)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Estado)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Pais)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Sobrenombre)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.FechaCreacion)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.RFC)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.observaciones)
+    </td>
+    <td>
+        @Html.ActionLink("Editar", "Edit", new { id = item.idEmpresa }) |
+        @Html.ActionLink("Detalles", "Details", new { id = item.idEmpresa }) |
+        @Html.ActionLink("Borrar", "Delete", new { id = item.idEmpresa })
+    </td>
+</tr>
+    }
+
+</table>
+
+
